@@ -1,0 +1,127 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{algorithmic}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{graphics}
+\usepackage{textcomp}
+\usepackage{comment}
+\usepackage{tabularx}
+\usepackage{breqn}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{threeparttable}
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{color}
+\usepackage{soul}
+\usepackage{multirow}
+
+\setcounter{topnumber}{100}
+\setcounter{bottomnumber}{100}
+\setcounter{totalnumber}{100}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\topfraction}{1.0}
+
+% code style setting
+\lstset{
+    %プログラム言語(複数の言語に対応，C,C++も可)
+    language = c,
+    %枠外に行った時の自動改行
+    breaklines = true,
+    %自動開業後のインデント量(デフォルトでは20[pt])	
+    breakindent = 5pt,
+    %標準の書体
+    basicstyle = \ttfamily\scriptsize,
+    %basicstyle = {\small}
+    %コメントの書体
+    commentstyle = {\itshape \color[cmyk]{1,0.4,1,0}},
+    %関数名等の色の設定
+    % classoffset = 0,
+    %キーワード(int, ifなど)の書体
+    keywordstyle = {\bfseries \color[cmyk]{0,1,0,0}},
+    %""で囲まれたなどの"文字"の書体
+    % stringstyle = {\ttfamily \color[rgb]{0,0,1}},
+    %枠 "t"は上に線を記載, "T"は上に二重線を記載
+    %他オプション：leftline，topline，bottomline，lines，single，shadowbox
+    frame = TB,
+    %frameまでの間隔(行番号とプログラムの間)
+    framesep = 3pt,
+    %行番号の位置
+    numbers = left,
+    %行番号の間隔
+    stepnumber = 1,
+    %右マージン
+    xrightmargin=0pt,
+    %左マージン
+    xleftmargin=0pt,
+    %行番号の書体
+    numberstyle = \scriptsize,
+    %タブの大きさ
+    tabsize = 4,
+    %キャプションの場所("tb"ならば上下両方に記載)
+    captionpos = t,
+    columns=[l]fullflexible,
+    linewidth=6cm,
+    escapeinside={(*}{*)}
+}
+
+\bibliographystyle{unsrt}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+
+%%% Original command %%%
+\sethlcolor{yellow}
+\newcommand{\todo}[1]{\hl{\textbf{TODO:} #1}}
+\newcommand{\hack}[1]{\hl{\textbf{HACK:} #1}}
+% \newcommand{\todo}[1]{}
+% \newcommand{\hack}[1]{}
+
+
+%%% Original function %%%
+\def\MR#1#2{\multirow{#1}{*}{#2}}
+\def\MC#1#2#3{\multicolumn{#1}{#2}{#3}}
+
+
+%%% Start paper %%%
+\begin{document}
+
+\title{\todo{}}
+\maketitle
+
+\author{
+    \IEEEauthorblockN{Atsushi Yano and Takuya Azumi}
+    \IEEEauthorblockA{\textit{Graduate School of Science and Engineering,} \\ \textit{Saitama University}}
+}
+
+\input{./src/Abstract.tex}
+
+\begin{IEEEkeywords}
+    \todo{}
+\end{IEEEkeywords}
+
+\input{./src/Introduction.tex}
+
+\input{./src/SystemModel.tex}
+
+\input{./src/DesignImplementation.tex}
+
+\input{./src/CaseStudy.tex}
+
+\input{./src/Evaluation.tex}
+
+\input{./src/RelatedWork.tex}
+
+\input{./src/Conclusion.tex}
+
+%\section*{Acknowledgment}
+%\todo{}
+
+\bibliography{./bibliography/master_reference}
+
+\end{document}
