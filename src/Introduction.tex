@@ -1,5 +1,41 @@
 \section{Introduction}
 \label{sec: introduction}
 
-\cite{10.1145/3381847}
-\todo{}
+Real-time systems such as self-driving systems must be successfully executed while meeting various requirements such as output within a pre-determined time (i.e., deadline), low power consumption, and resource constraints \cite{koike2021federated, senapati2021hmds, kaur2020deep}.
+To meet these constraints, there has been much research on task allocation and scheduling \cite{igarashi2021accurate, asghari2020online, tong2020ql}, as well as on analyzing the end-to-end latency and the response time of a system \cite{yang2020exploring, kordon2020evaluation, chen2021partial}.
+Systems are becoming larger and more complex every year, and such studies use models that represent the complex dependencies and parallelism of tasks in the system, such as a directed acyclic graph (DAG).
+
+DAGs are used in many allocation, scheduling, and latency analysis studies \cite{choi2021picas, nguyen2019cache, klaus2021constrained} because they express the flow of processing from system input to output and can represent various kinds of information such as dependencies between tasks, task execution time, and execution period.
+To evaluate the performance of proposed methods in these studies, it is important to compare them with existing methods using task sets.
+Then, in the evaluation of methods using DAGs, randomly generated DAGs are used to ensure objectivity and to demonstrate generality \cite{dai2021timing, verucchi2020latency, gunzel2021suspension}.
+
+To ease such evaluations, random DAG generation tools such as the task graph for free (TGFF) \cite{tgff} and GGen \cite{cordeiro2010random} have been proposed and utilized in the latest publications \cite{sun2021deepweave, huang2020hda, rouxel-free, cao2018affinity}.
+These tools allow the user to parametrically specify the shape of the DAG (e.g., number of nodes, in-degree and out-degree per node) and the properties assigned to nodes and edges (e.g., execution time, execution period, communication time).
+Furthermore, because these tools use a pseudo-random number generator, other researchers can easily reproduce the DAG set by specifying the same options.
+However, TGFF and GGen have been proposed in 1999 and 2010, respectively, and cannot meet the requirements for multi-rate DAGs considering the state-of-the-art real-time systems.
+
+Since embedded systems in automobiles and avionics, as well as self-driving systems, contain multiple tasks that operate at different periods (e.g., sensors \cite{guanindustry}, localization \cite{verucchi2020latency} and angle synchronous \cite{hamann2017communication}), research targeting multi-rate DAGs is becoming increasingly important \cite{gunzel2021suspension, kordon2020evaluation}.
+In studies of such multi-rate DAGs, not only the shape of the DAG but also the ratio of execution time to task execution period has a significant impact on the performance of the method (e.g., implicit deadline \cite{ueter2021hard, cho2021conditionally} and task utilization \cite{nogd2020response, yang2020mixed}).
+However, TGFF cannot generate multi-rate DAGs, and GGen can only randomly set the period and the execution time to nodes.
+Therefore, most authors who consider multi-rate DAGs have their implementation of a random DAG set \cite{voronov2021ai, dong2019efficient, yang2020mixed, nogd2020response}.
+It is laborious for researchers to prepare their own set of random DAGs, and further reduces the reliability and reproducibility of the evaluation results.
+
+To solve these problems, this paper proposes a random DAG generation tool called a multi-rate DAG generator (MRDAG-Gen) that meets the requirements of state-of-the-art research.
+MRDAG-Gen extends existing DAG generation methods and provides a flexible evaluation platform.
+Since MRDAG-Gen uses a pseudo-random number generator, other researchers can reproduce the DAG sets used in the evaluation by specifying the same options.
+In addition, MRDAG-Gen supports researchers by providing batch generation of all random DAG sets at different parameters and the functionality to visualize scheduling results.
+
+\textbf{Contributions: } Our primary contributions are summarized as follows.
+\begin{itemize}
+    \item MRDAG-Gen provides a flexible DAG set by adding parameters to existing DAG generation methods and new chain-based generation methods.
+    \item MRDAG-Gen automatically sets properties that meet implicit deadlines and utilization constraints.
+    \item MRDAG-Gen reduces implementation effort through a batch generation of random DAG sets and visualization of scheduling results.
+\end{itemize}
+
+The remainder of the paper is organized as follows.
+Section~\ref{sec: system_model} describes a system model.
+Section~\ref{sec: design_implementation} explains the design and implementation of MRDAG-Gen.
+Section~\ref{sec: case_study} demonstrates the use of MRDAG-Gen based on case studies.
+Section~\ref{sec: evaluation} compares the performance of the proposed method with existing methods.
+Section~\ref{sec: related_work} compares MRDAG-Gen with existing random DAG generation methods.
+Finally, Section~\ref{sec: conclusion} presents the conclusions and future work.
