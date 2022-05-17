@@ -10,13 +10,13 @@ To evaluate the performance of proposed methods in these studies, it is importan
 Then, in the evaluation of methods using DAGs, randomly generated DAGs are used to ensure objectivity and to demonstrate generality \cite{dai2021timing, verucchi2020latency, gunzel2021suspension}.
 
 To ease such evaluations, random DAG generation tools such as the task graph for free (TGFF) \cite{tgff} and GGen \cite{cordeiro2010random} have been proposed and utilized in the latest publications \cite{sun2021deepweave, huang2020hda, rouxel-free, cao2018affinity}.
-These tools allow the user to parametrically specify the shape of the DAG (e.g., number of nodes, in-degree and out-degree per node) and the properties assigned to nodes and edges (e.g., execution time, execution period, communication time).
+These tools allow the user to parametrically specify the shape of the DAG (e.g., number of tasks, in-degree and out-degree per task) and the properties assigned to tasks and edges (e.g., execution time, execution period, communication time).
 Furthermore, because these tools use a pseudo-random number generator, other researchers can easily reproduce the DAG set by specifying the same options.
 However, TGFF and GGen have been proposed in 1999 and 2010, respectively, and cannot meet the requirements for multi-rate DAGs considering the state-of-the-art real-time systems.
 
 Since embedded systems in automobiles and avionics, as well as self-driving systems, contain multiple tasks that operate at different periods (e.g., sensors \cite{guanindustry}, localization \cite{verucchi2020latency} and angle synchronous \cite{hamann2017communication}), research targeting multi-rate DAGs is becoming increasingly important \cite{gunzel2021suspension, kordon2020evaluation}.
 In studies of such multi-rate DAGs, not only the shape of the DAG but also the ratio of execution time to task execution period has a significant impact on the performance of the method (e.g., implicit deadline \cite{ueter2021hard, cho2021conditionally} and task utilization \cite{nogd2020response, yang2020mixed}).
-However, TGFF cannot generate multi-rate DAGs, and GGen can only randomly set the period and the execution time to nodes.
+However, TGFF cannot generate multi-rate DAGs, and GGen can only randomly set the period and the execution time to tasks.
 Therefore, most authors who consider multi-rate DAGs have their implementation of a random DAG set \cite{voronov2021ai, dong2019efficient, yang2020mixed, nogd2020response}.
 It is laborious for researchers to prepare their own set of random DAGs, and further reduces the reliability and reproducibility of the evaluation results.
 
@@ -35,7 +35,6 @@ In addition, MRDAG-Gen supports researchers by providing batch generation of all
 The remainder of the paper is organized as follows.
 Section~\ref{sec: system_model} describes a system model.
 Section~\ref{sec: design_implementation} explains the design and implementation of MRDAG-Gen.
-Section~\ref{sec: case_study} demonstrates the use of MRDAG-Gen based on case studies.
-Section~\ref{sec: evaluation} compares the performance of the proposed method with existing methods.
+Section~\ref{sec: evaluation_case_study} evaluates MRDAG-Gen using case studies.
 Section~\ref{sec: related_work} compares MRDAG-Gen with existing random DAG generation methods.
 Finally, Section~\ref{sec: conclusion} presents the conclusions and future work.
