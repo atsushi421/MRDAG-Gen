@@ -7,7 +7,7 @@ Systems are becoming larger and more complex every year, and such studies use mo
 
 DAGs are used in many allocation, scheduling, and latency analysis studies \cite{choi2021picas, nguyen2019cache, klaus2021constrained} because they express the flow of processing from system input to output and can represent various kinds of information such as dependencies between tasks, task execution time, and execution period.
 To evaluate the performance of proposed methods in these studies, it is important to compare them with existing methods using task sets.
-Then, in the evaluation of methods using DAGs, randomly generated DAGs are used to ensure objectivity and to demonstrate generality \cite{dai2021timing, verucchi2020latency, gunzel2021suspension}.
+Then, in the evaluation of methods using DAGs, randomly generated DAGs are used to ensure objectivity and to demonstrate generality \cite{he2021response, verucchi2020latency, senapati2021hmds}.
 
 To ease such evaluations, random DAG generation tools such as the task graph for free (TGFF) \cite{tgff} and GGen \cite{cordeiro2010random} have been proposed and utilized in the latest publications \cite{sun2021deepweave, huang2020hda, rouxel-free, cao2018affinity}.
 These tools allow the user to parametrically specify the shape of the DAG (e.g., number of tasks, in-degree and out-degree per task) and the properties assigned to tasks and edges (e.g., execution time, execution period, communication time).
@@ -29,7 +29,7 @@ In addition, MRDAG-Gen supports researchers by providing batch generation of all
 \begin{itemize}
     \item MRDAG-Gen provides a flexible DAG set by adding parameters to existing DAG generation methods and new chain-based generation methods.
     \item MRDAG-Gen automatically sets properties that meet implicit deadlines and utilization constraints.
-    \item MRDAG-Gen reduces implementation effort through a batch generation of random DAG sets and visualization of scheduling results.
+    \item MRDAG-Gen reduces implementation effort through a batch generation of random DAG sets.
 \end{itemize}
 
 The remainder of the paper is organized as follows.

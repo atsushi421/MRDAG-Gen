@@ -49,7 +49,7 @@
     %他オプション：leftline，topline，bottomline，lines，single，shadowbox
     frame = TB,
     %frameまでの間隔(行番号とプログラムの間)
-    framesep = 3pt,
+    framesep = 1pt,
     %行番号の位置
     numbers = left,
     %行番号の間隔
@@ -65,7 +65,6 @@
     %キャプションの場所("tb"ならば上下両方に記載)
     captionpos = t,
     columns=[l]fullflexible,
-    linewidth=6cm,
     escapeinside={(*}{*)}
 }
 
@@ -77,10 +76,15 @@
 
 %%% Original command %%%
 \sethlcolor{yellow}
-\newcommand{\todo}[1]{\hl{\textbf{TODO:} #1}}
+% \newcommand{\todo}[1]{\hl{\textbf{TODO:} #1}}
 \newcommand{\hack}[1]{\hl{\textbf{HACK:} #1}}
-% \newcommand{\todo}[1]{}
+\newcommand{\todo}[1]{}
 % \newcommand{\hack}[1]{}
+
+\newcommand{\la}[0]{$\leftarrow$ }
+\newcommand{\ch}[0]{\checkmark}
+
+\newcommand{\tabml}[1]{\hspace{-2.2mm}\begin{tabular}{l} #1 \end{tabular}}
 
 
 %%% Original function %%%
@@ -102,7 +106,7 @@
 \input{./src/Abstract.tex}
 
 \begin{IEEEkeywords}
-    \todo{}
+    DAG, Random generation tool, Multi-rate systems
 \end{IEEEkeywords}
 
 \input{./src/Introduction.tex}

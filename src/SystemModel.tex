@@ -21,10 +21,13 @@
         \begin{tabular}{c|l}\hline\hline
             $G$            & DAG                                            \\ \hline
             $V$            & Set of all nodes of $G$                        \\ \hline
+            $|V|$          & Total number of nodes of $G$                   \\ \hline
             $E$            & Set of all edges of $G$                        \\ \hline
             $\tau_i$       & $i$-th Node                                    \\ \hline
             $C_i$          & WCET of $\tau_i$                               \\ \hline
             $e_{i,j}$      & Edge between $\tau_i$ and $\tau_j$             \\ \hline
+            $comm_{i,j}$   & Communication time of $e_{i,j}$                \\\hline
+            $CCR$          & CCR of $G$                                     \\\hline
             $D$            & End-to-end deadline                            \\ \hline
             $\tau^{tm}_i$  & $i$-th timer-driven node                       \\ \hline
             $\phi_i$       & Offset of $\tau^{tm}_i$                        \\ \hline
@@ -33,6 +36,7 @@
             $u_i$          & Utilization of $\tau^{tm}_i$                   \\\hline
             $U$            & Total Utilization of $G$                       \\\hline
             $\Gamma_i$     & $i$-th chain                                   \\\hline
+            $|\Gamma|$     & Total number of chains of $G$                  \\\hline
             $C_{\Gamma_i}$ & WCET of $\Gamma_i$                             \\ \hline
             $u_{\Gamma_i}$ & Utilization of $\Gamma_i$                      \\ \hline
             $T_{\Gamma_i}$ & Period of head timer-driven node of $\Gamma_i$ \\ \hline
@@ -59,6 +63,14 @@ $V$ is the set of all nodes, expressed as $V = \{\tau_1, ..., \tau_{|V|}\}$, whe
 Each node has a worst-case execution time (WCET), and the WCET of $\tau_i$ is denoted as $C_i$.
 $E$ is the set of all edges, where each edge $e_{i,j} \in E$ represents communication between $\tau_i$ and $\tau_j$ and a priority constraint.
 When $e_{i,j}$ exists in the DAG, $\tau_j$ cannot be executed until $\tau_i$ has completed its execution and the output of $\tau_i$ has arrived.
+If the communication time is given as an assumption, the communication time at $e_{i,j}$ is denoted as $comm_{i, j}$.
+The ratio of the sum of the communication times of all edges to the sum of the execution times of all nodes is called the communication-to-computation ratio (CCR) and is defined by Eq~\ref{eq: ccr}.
+
+\begin{equation}
+    \label{eq: ccr}
+    CCR = \frac{\sum\limits_{e_{i,j} \in E}comm_{i, j}}{\sum\limits_{\tau_i \in V}C_i}
+\end{equation}
+
 An end-to-end deadline $D$ is set at the exit node when it is necessary to guarantee the safety of hard real-time systems \cite{yano2021work} or the quality of service of cloud computing \cite{zhang2020efficient}.
 
 
