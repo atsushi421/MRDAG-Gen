@@ -1,0 +1,22 @@
+Seed: 0
+Number of DAGs: 100
+
+Graph structure:
+  Generation method: G(n, p)
+  Number of nodes:
+    Random: (10, 100, 10)
+  Probability of edge:
+    Random: (0.1, 0.9, 0.1)
+  Number of entry nodes:
+    Random: [1, 2, 3, 4, 5]
+  Number of exit nodes:
+    Random: [1, 2, 3, 4, 5]
+  Ensure weakly connected: True
+
+Properties:
+  Multi-rate:
+    (*\textbf{Periodic type: "All"} *)
+    (*\textbf{Period:} *)
+      (*\textbf{Random: (1, 100, 1)} *)
+    (*\textbf{Total utilization:} *)
+      (*\textbf{Combination: (0.05, 0.95, 0.05)} *)

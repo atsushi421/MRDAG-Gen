@@ -1,0 +1,24 @@
+Seed: 0
+Number of DAGs: 100
+
+Graph structure:
+  Generation method: Chain-based
+  (*\textbf{Number of chains:} *)
+    (*\textbf{Random: [2, 3, 4, 5, 6, 7, 8, 9, 10]} *)
+  Main sequence length:
+    Random: (2, 7, 1)
+  Merge chains:
+    Number of exit nodes:
+      Random: [2, 3, 4, 5]
+    Middle of chain: False
+    Exit node: True
+
+Properties:
+  Multi-rate:
+    Periodic type: "Chain"
+    Period:
+      Random: (50, 1000, 1)
+    (*\textbf{Total utilization:} *)
+      (*\textbf{Combination: (0.5, 4.0, 0.5)} *)
+    (*\textbf{Maximum utilization:} *)
+      (*\textbf{Fixed: 1.0} *)
