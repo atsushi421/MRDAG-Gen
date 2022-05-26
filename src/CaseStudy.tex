@@ -6,6 +6,10 @@ This section illustrates that MRDAG-Gen can generate the random DAG sets used in
 Case studies of a single-rate DAG, a multi-rate DAG consisting of only timer-driven nodes, and a chain-based multi-rate DAG are shown, respectively.
 
 
+\subsection{Case study 1}
+\label{ssec: case_study_1}
+
+
 \begin{figure*}[t]
     \begin{tabular}{c}
         %1
@@ -50,6 +54,10 @@ Then, the total communication time is calculated from the CCR and the sum of exe
 Thus, the user can generate all DAG sets used in the evaluation with a single command, without adjusting the number of nodes or CCR.
 
 
+\subsection{Case study 2}
+\label{ssec: case_study_2}
+
+
 \begin{figure*}[t]
     \begin{tabular}{c}
         %1
@@ -91,6 +99,10 @@ An example of generating a multi-rate DAG with a random period and execution tim
 Here, timer-driven nodes are drawn as squares.
 Since {\it Combination} is specified for {\it Total utilization} (lines 21-22 in Fig~\ref{fig: case_study_all_timer}), MRDAG-Gen generates 100 DAGs each with total utilization from 5\% to 95\% in 5\% increments.
 For each DAG, the utilization of each node is determined by the UUniFast method to satisfy the total utilization, and the execution time is calculated from the utilization and a randomly selected period from a uniform distribution ranging from 1 to 100.
+
+
+\subsection{Case study 3}
+\label{ssec: case_study_3}
 
 
 \begin{figure*}[t]
