@@ -1,1 +1,1 @@
-# MRDAG-Gen
+# RD-Gen

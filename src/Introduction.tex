@@ -9,8 +9,8 @@ DAGs are used in many allocation, scheduling, and latency analysis studies \cite
 To evaluate the performance of proposed methods, it is important to compare them with existing methods using task sets.
 Accordingly, method evaluations using DAGs, randomly generated DAGs are used to ensure objectivity and demonstrate generality \cite{he2021response, verucchi2020latency, senapati2021hmds}.
 
-To aid in such evaluations, random DAG generation tools such as task graph for free (TGFF) \cite{tgff} and GGen \cite{cordeiro2010random}, have been proposed and utilized in the latest publications \cite{sun2021deepweave, huang2020hda, rouxel-free, cao2018affinity}.
-These tools allow the user to parametrically specify the shape of a DAG (e.g., the number of tasks and the in-degree and out-degree per task) and the properties assigned to the tasks and edges (e.g., the execution time, the execution period, and the communication time).
+To aid in such evaluations, random DAG generation tools such as task graph for free (TGFF) \cite{tgff} and () GGen \cite{cordeiro2010random}, have been proposed and utilized in the latest publications \cite{sun2021deepweave, huang2020hda, rouxel-free, cao2018affinity}.
+These tools allow the user to parametrically specify the shape of a DAG (e.g., the number of nodes and the in-degree and out-degree per node) and the properties assigned to the tasks and edges (e.g., the execution time, the execution period, and the communication time).
 Furthermore, because these tools use a pseudo-random number generator, other researchers can easily reproduce a given DAG set by specifying the same options.
 However, TGFF and GGen have been proposed in 1999 and 2010, respectively, and cannot meet the requirements of multi-rate DAGs considering state-of-the-art real-time systems.
 
@@ -20,22 +20,21 @@ However, TGFF cannot generate multi-rate DAGs, and GGen can only randomly set th
 Therefore, most researchers who consider multi-rate DAGs have to implement their own random DAG sets \cite{voronov2021ai, dong2019efficient, yang2020mixed, nogd2020response}.
 It is laborious for researchers to prepare their own random DAG sets, and this practice further reduces the reliability and reproducibility of the evaluation results.
 
-To solve these problems, this paper proposes a random DAG generation tool called the multi-rate DAG generator (MRDAG-Gen), which meets the requirements of state-of-the-art research.
-MRDAG-Gen extends existing DAG generation methods and provides a flexible evaluation platform.
-Because MRDAG-Gen uses a pseudo-random number generator, other researchers can reproduce the DAG sets used in an evaluation by specifying the same options.
-In addition, MRDAG-Gen supports researchers by providing both batch generation of random DAG sets at different parameters and the functionality to visualize scheduling results.
+To solve these problems, this paper proposes a random DAG generator considering multi-rate applications for reproducible scheduling evaluation (RD-Gen).
+RD-Gen extends existing DAG generation methods and provides a flexible evaluation platform.
+Because RD-Gen uses a pseudo-random number generator, other researchers can reproduce the DAG sets used in an evaluation by specifying the same options.
 
 \textbf{Contributions: } Our primary contributions are summarized as follows.
 \begin{itemize}
-    \item MRDAG-Gen provides flexible DAG sets by adding parameters to existing DAG generation methods and a new chain-based generation method.
-    \item MRDAG-Gen automatically sets properties that meet implicit deadlines and utilization constraints.
-    \item MRDAG-Gen reduces implementation effort via the batch generation of random DAG sets.
+    \item RD-Gen provides flexible random DAG sets by adding parameters to existing DAG construction methods and a new chain-based construction method.
+    \item RD-Gen automatically sets various properties, including complex properties calculated from multiple values.
+    \item RD-Gen reduces implementation effort via the batch generation of random DAG sets.
 \end{itemize}
 
 The remainder of the paper is organized as follows.
 Section~\ref{sec: system_model} describes a system model.
-Section~\ref{sec: design_implementation} explains the design and implementation of MRDAG-Gen.
+Section~\ref{sec: design_implementation} explains the design and implementation of RD-Gen.
 Section~\ref{sec: case_study} presents case studies.
-Section~\ref{sec: evaluation} compares MRDAG-Gen with existing random DAG generation methods.
+Section~\ref{sec: evaluation} compares RD-Gen with existing random DAG generation methods.
 Section~\ref{sec: related_work} discusses related work.
 Finally, Section~\ref{sec: conclusion} presents the conclusions and future work.

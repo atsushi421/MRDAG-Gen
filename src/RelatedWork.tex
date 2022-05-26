@@ -1,14 +1,14 @@
 \section{Related work}
 \label{sec: related_work}
 
-This section describes existing random DAG generation tools and existing studies using random DAGs and compares them with MRDAG-Gen.
-Table~\ref{tab: comparison} shows a comparison of MRDAG-Gen with existing methods.
+This section describes existing random DAG generation tools and existing studies using random DAGs and compares them with RD-Gen.
+Table~\ref{tab: comparison} shows a comparison of RD-Gen with existing methods.
 
 \begin{table}[tb]
     \centering
     {
 
-        \caption{MRDAG-Gen vs existing methods}
+        \caption{RD-Gen vs existing methods}
         \label{tab: comparison}
         \renewcommand{\arraystretch}{1.2}
         \scalebox{0.8}{
@@ -29,7 +29,7 @@ Table~\ref{tab: comparison} shows a comparison of MRDAG-Gen with existing method
                 Klaus et al. \cite{klaus2021constrained}   & \ch & \ch &     &     &     \\\hline
                 Tang et al. \cite{tang2020response}        & \ch & \ch &     & \ch &     \\\hline
                 Choi et al. \cite{choi2021picas}           & \ch & \ch &     & \ch &     \\\hline
-                MRDAG-Gen                                  & \ch & \ch & \ch & \ch & \ch \\\hline
+                RD-Gen                                     & \ch & \ch & \ch & \ch & \ch \\\hline
             \end{tabular}
         }
         \begin{tablenotes}[normal]{
@@ -44,11 +44,11 @@ Table~\ref{tab: comparison} shows a comparison of MRDAG-Gen with existing method
 \end{table}
 
 
-\subsection{Random DAG generation with unique implementation}
+\subsection{Random DAG generation tools}
 \label{sec: random_tool}
 
 Random DAG generation tools provide reliability and reproducibility for evaluations of scheduling and latency analysis studies.
-TGFF \cite{tgff} is the first tool proposed for this purpose and has been used to evaluate most recent studies \cite{roeder2021energy, fard2021analytical, wu2021evolutionary, costa2021extracting}.
+TGFF \cite{tgff} is the first tool proposed for this purpose and has been used to evaluate recent studies \cite{roeder2021energy, fard2021analytical, wu2021evolutionary}.
 TGFF determines the shape of a DAG primarily by specifying either or both the maximum and minimum input degree and maximum (first) output degree for a single node (the {\it Fan-in/Fan-out} method).
 TGFF can quickly generate many DAGs, and the task set can be easily reproduced by other researchers by inputting the same parameters.
 However, TGFF was released in 1998 and has many problems, such as its output format (.tgff), which is difficult to handle, and it cannot generate the multi-rate DAGs.
@@ -58,34 +58,34 @@ GGen allows the user to add properties such as the execution period and the comm
 However, GGen does not allow constraints to be specified between different properties, such as implicit deadlines (i.e., the execution time of a node must not exceed its period).
 Therefore, users with such requirements must adjust these values themselves.
 
-Other random DAG generation tools such as DAGGEN \cite{amalarethinam2011dagen} and MRTG \cite{ashish2016modular} have also been proposed.
-DAGGEN generates random workflow applications by specifying the node load balancing, edge connection probability, and workflow shape.
+Other random DAG generation tools such as DAGEN \cite{amalarethinam2011dagen} and MRTG \cite{ashish2016modular} have also been proposed.
+DAGEN generates random workflow applications by specifying the node load balancing, edge connection probability, and workflow shape.
 MRTG is a random DAG generation tool with a module-based implementation for user extensibility.
 However, these tools are not capable of generating multi-rate DAGs.
-Conversely, MRDAG-Gen can flexibly generate multi-rate DAGs of various types.
-In addition, MRDAG-Gen can automatically set properties calculated by multiple values such as CCR and the total utilization.
+Conversely, RD-Gen can flexibly generate multi-rate DAGs of various types.
+In addition, RD-Gen can automatically set properties calculated by multiple values such as CCR and the total utilization.
 
 
 \subsection{Unique implementation of random DAG generation}
 
 This section presents existing studies in which the authors generated random DAG sets to evaluate their own implemented algorithms and settings.
-Because there are no random DAG generation tools capable of generating multi-rate DAGs, as described in Section~\ref{sec: random_tool}, most studies that consider multi-rate DAGs include unique implementations.
+Because there are no random DAG generation tools that can generate multi-rate DAGs by specifying the total utilization, as described in Section~\ref{sec: random_tool}, most studies that consider multi-rate DAGs include unique implementations.
 
 In real-time systems such as in-vehicle systems and self-driving systems, multi-rate DAGs consisting of only timer-driven nodes are considered.
 Many real-time system researchers use the {\it G(n, p)} method to construct DAGs and generate random task sets with different numbers of nodes, different total utilizations, and different periods. \cite{voronov2021ai, he2021response, dong2019efficient}.
-While proprietary algorithms are used to construct graphs in some cases, the approach \todo{unclear} is similar in that the total utilization is determined using the UUniFast method, and the WCET value of the nodes are assigned based on the utilization and the periods \cite{yang2020mixed, gunzel2021suspension, ueter2021hard}.
+While proprietary algorithms are used to construct graphs in some cases, the approach is similar in that the utilization is determined using the UUniFast method, and the WCET value of the nodes are assigned based on the utilization and the periods \cite{yang2020mixed, gunzel2021suspension, ueter2021hard}.
 
 In a multi-rate DAG, as considered in automotive systems, a period is randomly assigned to each node based on the period observed in the automotive application.
 Verucchi et al. \cite{verucchi2020latency} randomly extended the automotive benchmark proposed by BOSCH in the 2015 WATERS Challenge \cite{kramer2015real} to analyze the performance of their proposed method.
-Verucchi et al. randomly set the task period from the values $[1, 5, 10, 20, 50, 100, 200, 1000]$ in milliseconds, as found in automotive applications, for the DAG utilization.
+Verucchi et al. randomly set the task period from the values $[1, 5, 10, 20, 50, 100, 200, 1,000]$ in milliseconds, as found in automotive applications, for the DAG utilization.
 Klaus et al. \cite{klaus2021constrained} set the utilization, the period, and the number of nodes for each DAG node.
 Verucchi et al. and Klaus et al. create random task sets based on node chains consisting of only timer-driven nodes.
-MRDAG-Gen can also generate chains consisting of only timer-driven nodes using the {\it Chain-based} method and by specifying the {\it Period type} as {\it “All”}.
+RD-Gen can also generate chains consisting of only timer-driven nodes using the {\it Chain-based} method and by specifying the {\it Period type} as {\it “All”}.
 Using the Python NetworkX library, Kordon et al. \cite{kordon2020evaluation} randomly set the period, the number of edges per task, the release time, and the number of entry nodes for their DAG sets.
-MRDAG-Gen can automatically set all combinations of the total utilization, periods, and the number of nodes as described above.
+RD-Gen can automatically set all combinations of the total utilization, periods, and the number of nodes as described above.
 
 Studies of chain-based multi-rate DAGs, such as the latest ROS-based systems, have also been evaluated using random task sets.
 Tang et al. \cite{tang2020response} allocated a value of the utilization to each chain based on the total utilization of the entire system and the number of chains and then assigned the utilization to the execution units in the chain.
 Choi et al. \cite{choi2021picas} similarly assigned a utilization value to each chain using the UUniFast method based on the total system-wide utilization.
-Multi-rate DAGs based on such chains can be generated flexibly with the {\it Chain-based} method in MRDAG-Gen.
-In addition, because MRDAG-Gen allows the utilization to be automatically set based on the chain, researchers do not need to implement this functionality on their own.
+Multi-rate DAGs based on such chains can be generated flexibly with the {\it Chain-based} method in RD-Gen.
+In addition, because RD-Gen allows the utilization to be automatically set based on the chain, researchers do not need to implement this functionality on their own.

@@ -19,16 +19,16 @@
     \renewcommand{\arraystretch}{1.2}
     \scalebox{1.0}{
         \begin{tabular}{c|l}\hline\hline
-            Symbols        & Descriptions                                       \\\hline\hline
+            Symbols        & \MC{1}{c}{Descriptions}                            \\\hline\hline
             $G$            & DAG                                                \\ \hline
             $V$            & Set of all nodes of $G$                            \\ \hline
             $|V|$          & Total number of nodes of $G$                       \\ \hline
             $E$            & Set of all edges of $G$                            \\ \hline
             $\tau_i$       & $i$-th node                                        \\ \hline
-            $C_i$          & WCET of $\tau_i$                                   \\ \hline
+            $C_i$          & Worst-case execution time (WCET) of $\tau_i$       \\ \hline
             $e_{i,j}$      & Edge between $\tau_i$ and $\tau_j$                 \\ \hline
             $comm_{i,j}$   & Communication time of $e_{i,j}$                    \\\hline
-            $CCR$          & CCR of $G$                                         \\\hline
+            $CCR$          & communication-to-computation ratio (CCR) of $G$    \\\hline
             $D$            & End-to-end deadline                                \\ \hline
             $\tau^{tm}_i$  & $i$-th timer-driven node                           \\ \hline
             $\phi_i$       & Offset of $\tau^{tm}_i$                            \\ \hline
@@ -65,7 +65,7 @@ Each node has a worst-case execution time (WCET), and the WCET of $\tau_i$ is de
 $E$ is the set of all edges, where each edge $e_{i,j} \in E$ represents communication between $\tau_i$ and $\tau_j$ and a priority constraint.
 When $e_{i,j}$ exists in the DAG, $\tau_j$ cannot be executed until $\tau_i$ has completed its execution and the output of $\tau_i$ has arrived.
 If the communication time is given as an assumption, the communication time at $e_{i,j}$ is denoted as $comm_{i, j}$.
-The ratio of the sum of the communication times of all edges to the sum of the execution times of all nodes is called the communication-to-computation ratio (CCR) and is defined by Eq~\ref{eq: ccr}.
+The ratio of the sum of the communication times of all edges to the sum of the execution times of all nodes is called the communication-to-computation ratio (CCR) and is defined by Eq.~(\ref{eq: ccr}).
 
 \begin{equation}
     \label{eq: ccr}
@@ -80,7 +80,7 @@ An end-to-end deadline $D$ is set at the exit node when it is necessary to guara
 
 A multi-rate DAG is a DAG that contains multiple nodes that are triggered with different periods.
 Here, the definitions of nodes and edges in a multi-rate DAG are the same as those given in Section~\ref{ssec: single_rate_dag}.
-Multi-rate DAGs can be broadly classified into two categories: (i) DAGs in which all nodes are timer driven, such as in automotive systems \cite{kordon2020evaluation, verucchi2020latency}, and (ii) DAGs that combine a chain consisting of timer-driven nodes and a chain of linked event-driven nodes, such as in self-driving systems \cite{choi2021picas, tang2020response}.
+Multi-rate DAGs can be broadly classified into two categories: (i) DAGs in which all nodes are timer driven, such as in automotive systems \cite{kordon2020evaluation, verucchi2020latency}, and (ii) DAGs that combine a chain consisting of timer-driven nodes and a sequence of linked event-driven nodes, such as in self-driving systems \cite{choi2021picas, tang2020response}.
 
 
 \subsubsection{Multi-rate DAG consisting of only timer-driven nodes}
@@ -89,10 +89,9 @@ Multi-rate DAGs can be broadly classified into two categories: (i) DAGs in which
 Each timer-driven node in such multi-rate DAGs is denoted by $\tau^{tm}_i$, and $\tau^{tm}_i$ is characterized by the tuple $(\phi_i, Ci, Ti, di)$, where $\phi_i$, $T_i$, and $d_i$ represent the offset, execution period, and relative deadline, respectively.
 For DAGs that consider timer-driven nodes, every timer-driven node has a relative deadline of $T_i$ time units indicating that every job of $\tau^{tm}_i$ has an absolute deadline at $T_i$ time units after its release \cite{yang2020mixed, cho2021conditionally}.
 Such a time constraint is called an implicit deadline.
-Accordingly, MRDAG-Gen is designed to generate DAGs that consider implicit deadlines.
 
 The utilization of $\tau^{tm}_i$ is denoted as $u_i$, such that $u_i = C_i / T_i$.
-The total utilization $U$ of a DAG consisting only of timer-driven nodes is defined by Eq.~\ref{eq: total_utilization_only_timer}.
+The total utilization $U$ of a DAG consisting only of timer-driven nodes is defined by Eq.~(\ref{eq: total_utilization_only_timer}).
 
 \begin{equation}
     \label{eq: total_utilization_only_timer}
@@ -105,7 +104,7 @@ The total utilization $U$ of a DAG consisting only of timer-driven nodes is defi
     \scalebox{1.0}{
         \includegraphics[width=\linewidth]{./src/figure/chain_based_dag.pdf}
     }
-    \caption{Multi-rate DAGs consisting of chains.}
+    \caption{Multi-rate DAGs consisting of multiple chains.}
     \label{fig: chain_dag}
 \end{figure}
 
@@ -113,18 +112,18 @@ The total utilization $U$ of a DAG consisting only of timer-driven nodes is defi
 \subsubsection{Chain-based multi-rate DAG}
 \label{sssec: dag_chain}
 
-In the latest multi-rate systems, DAGs consisting of the chain shown in Fig.~\ref{fig: chain_dag} are considered.
+In the latest multi-rate applications, DAGs consisting of the multiple chains shown in Fig.~\ref{fig: chain_dag} are considered.
 Each chain $\Gamma_i$ is denoted as $\Gamma_i = \{\tau^{tm}_i, \tau_k, ..., \tau_{|\Gamma_i|}\}$, where $|\Gamma_i|$ is the number of nodes that compose $\Gamma_i$.
 The head $\tau^{tm}_i$ in the chain is triggered periodically, and subsequent event-driven nodes are triggered by their direct predecessors.
 This definition is the same as that used in existing studies \cite{choi2020chain, tang2020response}.
-The WCET of $\Gamma_i$ is denoted by $C_{\Gamma_i}$ and defined in Eq.~\ref{eq: wcet_chain}.
+The WCET of $\Gamma_i$ is denoted by $C_{\Gamma_i}$ and defined in Eq.~(\ref{eq: wcet_chain}).
 
 \begin{equation}
     \label{eq: wcet_chain}
     C_{\Gamma_i} = \sum_{\tau_i \in \Gamma}C_i
 \end{equation}
 
-Because the chain is executed in a manner dependent on the period of the head timer-driven node, the utilization of the chain $u_{\Gamma_i}$ is defined by Eq~\ref{eq: chain_utilization}.
+Because the chain is executed in a manner dependent on the period of the head timer-driven node, the utilization of the chain $u_{\Gamma_i}$ is defined by Eq.~(\ref{eq: chain_utilization}).
 
 \begin{equation}
     \label{eq: chain_utilization}
@@ -132,7 +131,7 @@ Because the chain is executed in a manner dependent on the period of the head ti
 \end{equation}
 
 \noindent Here, $T_{\Gamma_i}$ is the period of the head timer-driven node $\tau^{tm}_i$ of the chain.
-The total utilization of the chain-based multi-rate DAG is defined by Eq~\ref{eq: chain_total_utilization}.
+The total utilization of the chain-based multi-rate DAG is defined by Eq.~(\ref{eq: chain_total_utilization}).
 
 \begin{equation}
     \label{eq: chain_total_utilization}
@@ -142,4 +141,4 @@ The total utilization of the chain-based multi-rate DAG is defined by Eq~\ref{eq
 Chain-based multi-rate DAGs primarily exist in robot operating system (ROS)-based systems \cite{casini2019response, choi2021picas}.
 In a typical ROS-based system, such as a self-driving system (e.g., Autoware \cite{future}), different sensor data are processed and merged by multiple chains to output the final command.
 When modeling ROS-based systems as DAGs, it is necessary to consider DAGs in which multiple chains merge at the exit nodes ((a) in Fig.~\ref{fig: chain_dag}), where the chain branches ((b) in Fig.~\ref{fig: chain_dag}), and those in which multiple chains are vertically linked ((c) in Fig.~\ref{fig: chain_dag}).
-MRDAG-Gen can generate all of these DAG types by using various parameters.
+RD-Gen can generate all of these DAG types by using various parameters.

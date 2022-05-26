@@ -26,8 +26,8 @@
 \end{table}
 
 
-This section shows that compared to existing random DAG generation tools, MRDAG-Gen can generate a random DAG set with fewer lines of code and no unique user implementation.
-Table~\ref{tab: processes} shows the processes that must be implemented by the user and the number of lines of code used in the tool comparison.
+This section shows that compared to existing random DAG generation tools, RD-Gen can generate a random DAG set with fewer lines of code and no unique user implementation.
+Table~\ref{tab: processes} shows the processes that must be implemented by the user and the number of lines of code.
 Here, the process in Table~\ref{tab: processes} is written in Python and shell scripts, and the Python NetworkX library is used for processes related to DAGs.
 
 
@@ -42,20 +42,20 @@ Here, the process in Table~\ref{tab: processes} is written in Python and shell s
             \multicolumn{1}{|l|}{}         & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Lines of description\\ for tool options\end{tabular}} & \multicolumn{1}{c|}{Lines of code}                  \\ \hline
             TGFF \cite{tgff}               & 6                                                                                                    & \tabml{$(a) \times 2 + (b) + (c) + (f) + (g) + (i)$ \\ $= 101$} \\ \hline
             GGen \cite{cordeiro2010random} & 3                                                                                                    & \tabml{$(a) \times 2 + (b) + (g) + (i)$             \\ $= 51$}              \\ \hline
-            MRDAG-Gen                      & 20                                                                                                   & 0                                                   \\ \hline
+            RD-Gen                         & 20                                                                                                   & 0                                                   \\ \hline
         \end{tabular}
     }
 \end{table}
 
 
 The amount of description required to generate a random DAG set for the case studies in Section~\ref{ssec: case_study_1} is shown in Table~\ref{tab: eval_case_study_single}.
-In this case, while TGFF and GGen require the user to implement more than 50 lines, MRDAG-Gen can generate all random DAG sets using only the tool's functionality.
+In this case, while TGFF and GGen require the user to implement more than 50 lines, RD-Gen can generate all random DAG sets using only the tool's functionality.
 Since TGFF and GGen do not have the functionality to generate DAGs with different parameter settings at once, the user must execute the generation command many times while changing the parameters, using shell scripts or other means.
-In contrast, MRDAG-Gen generates DAGs with all parameter combinations by specifying {\it Combination} as a parameter and automatically divides them into directories.
+In contrast, RD-Gen generates DAGs with all parameter combinations by specifying {\it Combination} as a parameter and automatically divides them into directories.
 Although TGFF uses the {\it Fan-in/Fan-out} method to construct DAGs, the .tgff files output by TGFF are in a proprietary format and require users to implement a reading process.
 Furthermore, since TGFF and GGen do not guarantee that the graph is weakly connected, users may unintentionally use a non weakly connected DAG for evaluation.
 TGFF and GGen cannot specify parameters such as CCR that are calculated from multiple properties. Therefore, the CCR must be adjusted for the DAG set after it is generated.
-In MRDAG-Gen, users can automate all of the above processes by inputting the YAML file as shown on the left side of Fig.~\ref{fig: case_study_single}.
+In RD-Gen, users can automate all of the above processes by inputting the YAML file as shown on the left side of Fig.~\ref{fig: case_study_single}.
 
 
 \begin{table}[tb]
@@ -69,7 +69,7 @@ In MRDAG-Gen, users can automate all of the above processes by inputting the YAM
             \multicolumn{1}{|l|}{}         & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Lines of description\\ for tool options\end{tabular}} & \multicolumn{1}{c|}{Lines of code}   \\ \hline
             TGFF \cite{tgff}               & -                                                                                                    & \tabml{$(a) + (b) + (d) + (g) + (j)$ \\ $= 63$} \\ \hline
             GGen \cite{cordeiro2010random} & 2                                                                                                    & \tabml{$(a) + (b) + (g) + (j)$       \\ $= 53$}       \\ \hline
-            MRDAG-Gen                      & 20                                                                                                   & 0                                    \\ \hline
+            RD-Gen                         & 20                                                                                                   & 0                                    \\ \hline
         \end{tabular}
     }
 \end{table}
@@ -80,7 +80,7 @@ TGFF does not support the {\it G(n, p)} method and multi-rate DAG.
 GGen allows properties to be randomly set to nodes or edges within a user-specified range after graph construction.
 However, GGen does not allow users to specify the total utilization used in the evaluation of most studies that consider multi-rate DAGs.
 Therefore, the user has to go through the trouble of implementing such as lines 1-7 in Algorithm~\ref{alg: set_utilization}.
-In contrast, MRDAG-Gen uses the UUniFast method to randomly and automatically set the period and execution time for each node to meet the specified total utilization.
+In contrast, RD-Gen uses the UUniFast method to randomly and automatically set the period and execution time for each node to meet the specified total utilization.
 
 
 \begin{table}[tb]
@@ -94,7 +94,7 @@ In contrast, MRDAG-Gen uses the UUniFast method to randomly and automatically se
             \multicolumn{1}{|l|}{}         & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Lines of description\\ for tool options\end{tabular}} & \multicolumn{1}{c|}{Lines of code} \\ \hline
             TGFF \cite{tgff}               & -                                                                                                    & \tabml{$(a) + (b) + (d) + (k)$     \\ $= 138$}      \\ \hline
             GGen \cite{cordeiro2010random} & -                                                                                                    & \tabml{$(a) + (b) + (d) + (k)$     \\ $= 138$}      \\ \hline
-            MRDAG-Gen                      & 22                                                                                                   & 0                                  \\ \hline
+            RD-Gen                         & 22                                                                                                   & 0                                  \\ \hline
         \end{tabular}
     }
 \end{table}
@@ -102,7 +102,7 @@ In contrast, MRDAG-Gen uses the UUniFast method to randomly and automatically se
 
 The amount of description to generate a chain-based random DAG set, as in the case study in Section~\ref{ssec: case_study_3}, is shown in Table~\ref{tab: eval_case_study_chain}.
 Chain-based multi-rate DAGs cannot be generated by TGFF and GGen because they are considered in state-of-the-art self-driving systems research.
-MRDAG-Gen can generate a batch of random chain-based DAG sets with different total utilization without any user implementation by inputting a YAML file as shown in Fig.~\ref{fig: case_study_chain}.
+RD-Gen can generate a batch of random chain-based DAG sets with different total utilization without any user implementation by inputting a YAML file as shown in Fig.~\ref{fig: case_study_chain}.
 
-The evaluation results demonstrated that MRDAG-Gen can generate the random DAG sets used in the evaluation with only an intuitive YAML file description, regardless of the single rate multi-rate.
-Therefore, MRDAG-Gen is a flexible evaluation platform that can be adapted to various requirements and provides reliability and reproducibility for the latest DAG studies.
+The evaluation results demonstrated that RD-Gen can generate the random DAG sets used in the evaluation with only an intuitive YAML file description, regardless of the single rate multi rate.
+Therefore, RD-Gen is a flexible evaluation platform that can be adapted to various requirements and provides reliability and reproducibility for the latest DAG studies.
